@@ -143,6 +143,18 @@ local removeNamespaceReferences(args) = std.map(function(arg) std.strReplace(arg
       ),
       'runtime-config.file': '/etc/enterprise-metrics/runtime.yml',
       'store.engine': 'blocks',
+      '#instrumentation.enabled':: d.val(
+        default=self['instrumentation.enabled'],
+        help='`instrumentation.enabled` enables self-monitoring metrics recorded under the system instance',
+        type=d.T.string
+      ),
+      'instrumentation.enabled': true,
+      '#instrumentation.distributor-client.address':: d.val(
+        default=self['instrumentation.distributor-client.address'],
+        help='`instrumentation.distributor-client.address` specifies the gRPGC listen address of the distributor service to which the self-monitoring metrics are pushed. Must be a DNS address (`dns:///`) to enable client side load balancing.',
+        type=d.T.string
+      ),
+      'instrumentation.distributor-client.address': 'dns:///distributor:9095',
     },
 
     '#licenseSecretName':: d.val(
